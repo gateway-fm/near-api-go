@@ -6,7 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gateway-fm/near-api-go/models"
+	"github.com/gateway-fm/near-api-go/transaction"
 	itypes "github.com/gateway-fm/near-api-go/types"
+	"github.com/near/borsh-go"
 
 	"github.com/ethereum/go-ethereum/rpc"
 
@@ -122,7 +124,8 @@ type NodeStatusResponse struct {
 
 // Client communicates with the NEAR API.
 type Client struct {
-	config *config.Config
+	config  *config.Config
+	FinExec *account.FinalExecutionOutcome
 }
 
 // NewClient creates a new Client.
@@ -352,4 +355,20 @@ func (c *Client) GetBlockResult(ctx context.Context) (*itypes.BlockResult, error
 	}
 
 	return &blockresultinfo, nil
+}
+
+func (c *Client) GetFinalExec() *account.FinalExecutionOutcome {
+	return c.FinExec
+}
+
+func (c *Client) GetSignedTx(ctx context.Context) (*transaction.SignedTransaction, error) {
+	var signedTx transaction.SignedTransaction
+	bytes, err := borsh.Serialize(signedTx)
+	if err != nil {
+		return nil, fmt.Errorf("serializing signed transaction: %v", err)
+	}
+	if err := c.config.RPCClient.CallContext(ctx, &c.FinExec, "broadcast_tx_commit", base64.StdEncoding.EncodeToString(bytes)); err != nil {
+		return nil, fmt.Errorf("getting block returned an error: %w", err)
+	}
+	return &signedTx, nil
 }
