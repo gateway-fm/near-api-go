@@ -144,18 +144,31 @@ func (eo *ExecutionOutcome) GetStatusBasic() (ExecutionStatusBasic, bool) {
 	}
 }
 
+/*
+
 // ExecutionOutcomeWithID provides the transaction or receipt outcome with and id.
+
 type ExecutionOutcomeWithID struct {
 	ID      string           `json:"id"`
 	Outcome ExecutionOutcome `json:"outcome"`
 }
 
 // FinalExecutionOutcome is the final outcome of a transaction.
+
 type FinalExecutionOutcome struct {
 	RawStatus          json.RawMessage          `json:"status"`
 	Transaction        json.RawMessage          `json:"transaction"`
-	TransactionOutcome ExecutionOutcomeWithID   `json:"transaction_outcome"`
-	ReceiptsOutcome    []ExecutionOutcomeWithID `json:"receipts_outcome"`
+	TransactionOutcome *ExecutionOutcomeWithID   `json:"transaction_outcome"`
+	ReceiptsOutcome    []*ExecutionOutcomeWithID `json:"receipts_outcome"`
+}
+
+*/
+
+type FinalExecutionOutcome struct {
+	RawStatus          json.RawMessage     `json:"status"`
+	Transaction        json.RawMessage     `json:"transaction"`
+	TransactionOutcome *ExecutionOutcome   `json:"transaction_outcome"`
+	ReceiptsOutcome    []*ExecutionOutcome `json:"receipts_outcome"`
 }
 
 // GetStatus returns a bool indicating if the status is an FinalExecutionStatus, and if so, the FinalExecutionStatus.
