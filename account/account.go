@@ -292,8 +292,8 @@ func (a *Account) SignAndSendTransaction(
 		errorType, hasErrorType := status.Failure["error_type"]
 		if hasErrorMessage && hasErrorType {
 			return nil, fmt.Errorf(
-				"transaction %s failed with message < %v > and type < %v > ",
-				result.TransactionOutcome.ID,
+				"transaction %v failed with message < %v > and type < %v > ",
+				result.TransactionOutcome,
 				errorMessage,
 				errorType,
 			)
