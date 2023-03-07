@@ -57,19 +57,16 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+# golang.org/x/crypto v0.1.0
 ## explicit
 golang.org/x/crypto/sha3
 # golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
 ## explicit
-# golang.org/x/sys v0.0.0-20211004093028-2c5d950f24ef
-## explicit
+# golang.org/x/sys v0.1.0
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/tools v0.1.4
-## explicit
 # gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 ## explicit
 # gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce
